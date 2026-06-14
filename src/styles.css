@@ -139,6 +139,49 @@ body {
   color: var(--gold-400);
 }
 
+.hero__controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.langswitch {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.langswitch__btn {
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  padding: 7px 14px;
+  border-radius: 9px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.langswitch__btn[lang='ur'] {
+  font-family: var(--font-urdu), inherit;
+  font-size: 1rem;
+}
+
+.langswitch__btn:hover {
+  color: #fff;
+}
+
+.langswitch__btn.is-active {
+  background: var(--gold-500);
+  color: var(--green-900);
+}
+
 .theme-toggle {
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -216,6 +259,40 @@ body {
   border-radius: 10px;
   font-size: 0.9rem;
   max-width: 640px;
+}
+
+.notice--info {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* speech error alert */
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: #fef3e2;
+  color: #7a4a12;
+  border: 1px solid #f0d9b5;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 18px;
+  font-size: 0.92rem;
+}
+
+:root[data-theme='dark'] .alert {
+  background: #2c2113;
+  color: #f0d9b5;
+  border-color: #4a3a1d;
+}
+
+.alert button {
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: 15px;
+  flex-shrink: 0;
 }
 
 /* ---------- container & filters ---------- */
@@ -593,6 +670,40 @@ body {
   padding: 28px 20px 40px;
   color: var(--ink-faint);
   font-size: 0.85rem;
+}
+
+/* ---------- Urdu interface (RTL) ---------- */
+.app--ur .brand__title,
+.app--ur .hero__lede,
+.app--ur .filters__label,
+.app--ur .chip,
+.app--ur .resultbar,
+.app--ur .empty h3,
+.app--ur .empty p,
+.app--ur .btn,
+.app--ur .link-btn,
+.app--ur .notice,
+.app--ur .footer,
+.app--ur .searchbar__input,
+.app--ur .play-btn {
+  font-family: var(--font-urdu), var(--font-sans);
+}
+
+.app--ur .brand__title {
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  line-height: 1.8;
+}
+
+.app--ur .hero__lede {
+  line-height: 2.4;
+}
+
+/* Keep the brand row, controls and cards laid out sensibly under RTL */
+.app--ur .card,
+.app--ur .t--en,
+.app--ur .t--translit {
+  direction: ltr;
+  text-align: left;
 }
 
 @media (max-width: 560px) {

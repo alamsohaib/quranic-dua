@@ -1,0 +1,53 @@
+// Interface (UI chrome) strings. The dua content itself is always shown in
+// Arabic + Urdu + English; this only switches the surrounding interface.
+export const UI_LANGS = [
+  { code: 'en', label: 'English', short: 'EN' },
+  { code: 'ur', label: 'اردو', short: 'اردو' },
+]
+
+export const STRINGS = {
+  en: {
+    dir: 'ltr',
+    title: 'Duas of the Prophets',
+    subtitle: 'أَدْعِيَةُ الْأَنْبِيَاءِ عَلَيْهِمُ السَّلَام',
+    lede: 'The supplications the Prophets (peace be upon them) made to Allah, preserved in the Qur’an — in Arabic with Urdu and English translations, references, and audio recitation.',
+    searchPlaceholder: 'Search by word, prophet, theme, or reference…',
+    interface: 'Interface',
+    typeOfDua: 'Type of Dua',
+    prophet: 'Prophet',
+    show: 'Show',
+    all: 'All',
+    reset: 'Reset filters',
+    listen: 'Listen',
+    stop: 'Stop',
+    emptyTitle: 'No duas match your search',
+    emptyBody: 'Try a different word, prophet, or theme.',
+    footer: 'Made with care for the Ummah · References from the Holy Qur’an · Verify recitation with a qualified teacher.',
+    noSpeech: '⚠️ Your browser does not support the Web Speech API, so audio playback is unavailable. Try the latest Chrome or Edge.',
+    noArabicVoice: 'ℹ️ No Arabic voice was found on this device, so recitation may sound off or be silent. You can install one in Windows Settings → Time & Language → Speech.',
+    resultFound: (n) => `${n} ${n === 1 ? 'dua' : 'duas'} found`,
+    resultTotal: (n) => `${n} ${n === 1 ? 'dua' : 'duas'} in total`,
+  },
+  ur: {
+    dir: 'rtl',
+    title: 'انبیاء کرام کی دعائیں',
+    subtitle: 'أَدْعِيَةُ الْأَنْبِيَاءِ عَلَيْهِمُ السَّلَام',
+    lede: 'وہ دعائیں جو انبیاء کرام علیہم السلام نے اللہ تعالیٰ سے مانگیں اور قرآن مجید میں محفوظ ہیں — عربی متن کے ساتھ اردو اور انگریزی ترجمہ، حوالہ جات اور آواز میں سماعت کی سہولت۔',
+    searchPlaceholder: 'لفظ، نبی، موضوع یا حوالے سے تلاش کریں…',
+    interface: 'زبان',
+    typeOfDua: 'دعا کی قسم',
+    prophet: 'نبی',
+    show: 'دکھائیں',
+    all: 'تمام',
+    reset: 'فلٹر صاف کریں',
+    listen: 'سنیں',
+    stop: 'روکیں',
+    emptyTitle: 'آپ کی تلاش سے کوئی دعا نہیں ملی',
+    emptyBody: 'کوئی دوسرا لفظ، نبی یا موضوع آزمائیں۔',
+    footer: 'امتِ مسلمہ کے لیے محبت سے تیار کیا گیا · حوالہ جات قرآن مجید سے · تلاوت کسی اہل استاد سے تصدیق کر لیں۔',
+    noSpeech: '⚠️ آپ کا براؤزر ویب اسپیچ سہولت کو سپورٹ نہیں کرتا، اس لیے آواز دستیاب نہیں۔ تازہ ترین Chrome یا Edge آزمائیں۔',
+    noArabicVoice: 'ℹ️ اس ڈیوائس پر عربی آواز نہیں ملی، اس لیے تلاوت درست نہ سنائی دے یا خاموش رہے۔ آپ Windows Settings → Time & Language → Speech سے انسٹال کر سکتے ہیں۔',
+    resultFound: (n) => `${n} دعائیں ملیں`,
+    resultTotal: (n) => `کل ${n} دعائیں`,
+  },
+}

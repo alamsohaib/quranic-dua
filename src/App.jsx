@@ -1,8 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { CATEGORIES, DUAS } from './data/duas.js'
 import { useSpeech } from './useSpeech.js'
+import { STRINGS, UI_LANGS } from './i18n.js'
 
 const PROPHETS = [...new Set(DUAS.map((d) => d.prophet))]
+const PROPHET_UR = Object.fromEntries(DUAS.map((d) => [d.prophet, d.prophetUr]))
 
 const TRANSLATIONS = [
   { key: 'english', label: 'English' },
@@ -19,16 +21,24 @@ export default function App() {
     urdu: true,
     transliteration: true,
   })
-  const [theme, setTheme] = useState(
-    () => localStorage.getItem('dua-theme') || 'light'
-  )
+  const [theme, setTheme] = useState(() => localStorage.getItem('dua-theme') || 'light')
+  const [lang, setLang] = useState(() => localStorage.getItem('dua-lang') || 'en')
 
-  const { speak, stop, speakingId, supported } = useSpeech()
+  const t = STRINGS[lang]
+  const isUr = lang === 'ur'
+
+  const { speak, stop, speakingId, supported, error, hasArabicVoice, clearError } = useSpeech()
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
     localStorage.setItem('dua-theme', theme)
   }, [theme])
+
+  useEffect(() => {
+    document.documentElement.lang = lang
+    document.documentElement.dir = t.dir
+    localStorage.setItem('dua-lang', lang)
+  }, [lang, t.dir])
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -37,111 +47,90 @@ export default function App() {
       if (activeProphet !== 'all' && d.prophet !== activeProphet) return false
       if (!q) return true
       const haystack = [
-        d.prophet,
-        d.prophetAr,
-        d.prophetUr,
-        d.arabic,
-        d.transliteration,
-        d.english,
-        d.urdu,
-        d.reference,
-        d.note || '',
-        CATEGORIES[d.category]?.label || '',
-      ]
-        .join(' ')
-        .toLowerCase()
+        d.prophet, d.prophetAr, d.prophetUr, d.arabic, d.transliteration,
+        d.english, d.urdu, d.reference, d.note || '',
+        CATEGORIES[d.category]?.label || '', CATEGORIES[d.category]?.labelUr || '',
+      ].join(' ').toLowerCase()
       return haystack.includes(q)
     })
   }, [query, activeCategory, activeProphet])
 
-  const toggleTranslation = (key) =>
-    setShownTranslations((s) => ({ ...s, [key]: !s[key] }))
-
+  const toggleTranslation = (key) => setShownTranslations((s) => ({ ...s, [key]: !s[key] }))
   const resetFilters = () => {
     setQuery('')
     setActiveCategory('all')
     setActiveProphet('all')
   }
-
-  const hasFilters =
-    query || activeCategory !== 'all' || activeProphet !== 'all'
+  const hasFilters = query || activeCategory !== 'all' || activeProphet !== 'all'
 
   return (
-    <div className="app">
-      <BackgroundOrnament />
+    <div className={`app ${isUr ? 'app--ur' : ''}`}>
+      <div className="bg-ornament" aria-hidden />
 
       <header className="hero">
         <div className="hero__inner">
           <div className="hero__top">
             <div className="brand">
-              <span className="brand__mark" aria-hidden>
-                ۞
-              </span>
+              <span className="brand__mark" aria-hidden>۞</span>
               <div>
-                <h1 className="brand__title">Duas of the Prophets</h1>
-                <p className="brand__sub" dir="rtl" lang="ar">
-                  أَدْعِيَةُ الْأَنْبِيَاءِ عَلَيْهِمُ السَّلَام
-                </p>
+                <h1 className="brand__title">{t.title}</h1>
+                <p className="brand__sub" dir="rtl" lang="ar">{t.subtitle}</p>
               </div>
             </div>
-            <button
-              className="theme-toggle"
-              onClick={() => setTheme((t) => (t === 'light' ? 'dark' : 'light'))}
-              aria-label="Toggle theme"
-              title="Toggle light / dark"
-            >
-              {theme === 'light' ? '🌙' : '☀️'}
-            </button>
+
+            <div className="hero__controls">
+              <div className="langswitch" role="group" aria-label={t.interface}>
+                {UI_LANGS.map((l) => (
+                  <button
+                    key={l.code}
+                    className={`langswitch__btn ${lang === l.code ? 'is-active' : ''}`}
+                    onClick={() => setLang(l.code)}
+                    lang={l.code}
+                  >
+                    {l.label}
+                  </button>
+                ))}
+              </div>
+              <button
+                className="theme-toggle"
+                onClick={() => setTheme((th) => (th === 'light' ? 'dark' : 'light'))}
+                aria-label="Toggle theme"
+                title="Toggle light / dark"
+              >
+                {theme === 'light' ? '🌙' : '☀️'}
+              </button>
+            </div>
           </div>
 
-          <p className="hero__lede">
-            The supplications the Prophets (peace be upon them) made to Allah,
-            preserved in the Qur’an — in Arabic with Urdu and English
-            translations, references, and audio recitation.
-          </p>
+          <p className="hero__lede">{t.lede}</p>
 
           <div className="searchbar">
-            <span className="searchbar__icon" aria-hidden>
-              🔍
-            </span>
+            <span className="searchbar__icon" aria-hidden>🔍</span>
             <input
               type="search"
               className="searchbar__input"
-              placeholder="Search by word, prophet, theme, or reference…"
+              placeholder={t.searchPlaceholder}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              aria-label="Search duas"
+              aria-label={t.searchPlaceholder}
             />
             {query && (
-              <button
-                className="searchbar__clear"
-                onClick={() => setQuery('')}
-                aria-label="Clear search"
-              >
-                ✕
-              </button>
+              <button className="searchbar__clear" onClick={() => setQuery('')} aria-label="Clear">✕</button>
             )}
           </div>
 
-          {!supported && (
-            <p className="notice">
-              ⚠️ Your browser does not support the Web Speech API, so audio
-              playback is unavailable. Try the latest Chrome or Edge.
-            </p>
-          )}
+          {!supported && <p className="notice">{t.noSpeech}</p>}
+          {supported && !hasArabicVoice && <p className="notice notice--info">{t.noArabicVoice}</p>}
         </div>
       </header>
 
       <main className="container">
         <section className="filters" aria-label="Filters">
           <div className="filters__group">
-            <span className="filters__label">Type of Dua</span>
+            <span className="filters__label">{t.typeOfDua}</span>
             <div className="chiprow">
-              <Chip
-                active={activeCategory === 'all'}
-                onClick={() => setActiveCategory('all')}
-              >
-                All
+              <Chip active={activeCategory === 'all'} onClick={() => setActiveCategory('all')}>
+                {t.all}
               </Chip>
               {Object.entries(CATEGORIES).map(([key, cat]) => (
                 <Chip
@@ -150,44 +139,37 @@ export default function App() {
                   onClick={() => setActiveCategory(key)}
                   color={cat.color}
                 >
-                  <span aria-hidden>{cat.icon}</span> {cat.label}
+                  <span aria-hidden>{cat.icon}</span> {isUr ? cat.labelUr : cat.label}
                 </Chip>
               ))}
             </div>
           </div>
 
           <div className="filters__group">
-            <span className="filters__label">Prophet</span>
+            <span className="filters__label">{t.prophet}</span>
             <div className="chiprow">
-              <Chip
-                active={activeProphet === 'all'}
-                onClick={() => setActiveProphet('all')}
-              >
-                All
+              <Chip active={activeProphet === 'all'} onClick={() => setActiveProphet('all')}>
+                {t.all}
               </Chip>
               {PROPHETS.map((p) => (
-                <Chip
-                  key={p}
-                  active={activeProphet === p}
-                  onClick={() => setActiveProphet(p)}
-                >
-                  {p}
+                <Chip key={p} active={activeProphet === p} onClick={() => setActiveProphet(p)}>
+                  {isUr ? PROPHET_UR[p] : p}
                 </Chip>
               ))}
             </div>
           </div>
 
           <div className="filters__group">
-            <span className="filters__label">Show</span>
+            <span className="filters__label">{t.show}</span>
             <div className="chiprow">
-              {TRANSLATIONS.map((t) => (
+              {TRANSLATIONS.map((tr) => (
                 <Chip
-                  key={t.key}
-                  active={shownTranslations[t.key]}
-                  onClick={() => toggleTranslation(t.key)}
+                  key={tr.key}
+                  active={shownTranslations[tr.key]}
+                  onClick={() => toggleTranslation(tr.key)}
                   variant="toggle"
                 >
-                  {t.label}
+                  {tr.label}
                 </Chip>
               ))}
             </div>
@@ -195,26 +177,27 @@ export default function App() {
         </section>
 
         <div className="resultbar">
-          <span>
-            <strong>{filtered.length}</strong>{' '}
-            {filtered.length === 1 ? 'dua' : 'duas'}
-            {hasFilters ? ' found' : ' in total'}
-          </span>
-          {hasFilters && (
-            <button className="link-btn" onClick={resetFilters}>
-              Reset filters
-            </button>
-          )}
+          <span>{hasFilters ? t.resultFound(filtered.length) : t.resultTotal(filtered.length)}</span>
+          {hasFilters && <button className="link-btn" onClick={resetFilters}>{t.reset}</button>}
         </div>
 
+        {error && (
+          <div className="alert" role="alert">
+            <span>{error}</span>
+            <button onClick={clearError} aria-label="Dismiss">✕</button>
+          </div>
+        )}
+
         {filtered.length === 0 ? (
-          <EmptyState onReset={resetFilters} />
+          <EmptyState t={t} onReset={resetFilters} />
         ) : (
           <div className="grid">
             {filtered.map((d) => (
               <DuaCard
                 key={d.id}
                 dua={d}
+                t={t}
+                isUr={isUr}
                 shown={shownTranslations}
                 speak={speak}
                 stop={stop}
@@ -226,84 +209,58 @@ export default function App() {
         )}
       </main>
 
-      <footer className="footer">
-        <p>
-          Made with care for the Ummah · References from the Holy Qur’an ·
-          Verify recitation with a qualified teacher.
-        </p>
-      </footer>
+      <footer className="footer"><p>{t.footer}</p></footer>
     </div>
   )
 }
 
-function DuaCard({ dua, shown, speak, stop, isSpeaking, speechSupported }) {
+function DuaCard({ dua, t, isUr, shown, speak, stop, isSpeaking, speechSupported }) {
   const cat = CATEGORIES[dua.category]
   return (
-    <article className="card" style={{ '--accent': cat?.color }}>
+    <article className="card" style={{ '--accent': cat?.color }} dir="ltr">
       <div className="card__head">
         <div className="card__prophet">
-          <span className="card__prophet-ar" dir="rtl" lang="ar">
-            {dua.prophetAr}
-          </span>
-          <span className="card__prophet-en">{dua.prophet}</span>
+          <span className="card__prophet-ar" dir="rtl" lang="ar">{dua.prophetAr}</span>
+          <span className="card__prophet-en">{isUr ? dua.prophetUr : dua.prophet}</span>
         </div>
         <span className="card__cat">
-          <span aria-hidden>{cat?.icon}</span> {cat?.label}
+          <span aria-hidden>{cat?.icon}</span> {isUr ? cat?.labelUr : cat?.label}
         </span>
       </div>
 
-      <p className="card__arabic" dir="rtl" lang="ar">
-        {dua.arabic}
-      </p>
+      <p className="card__arabic" dir="rtl" lang="ar">{dua.arabic}</p>
 
-      <div className="card__audio">
-        {speechSupported && (
+      {speechSupported && (
+        <div className="card__audio">
           <button
             className={`play-btn ${isSpeaking ? 'play-btn--active' : ''}`}
             onClick={() => (isSpeaking ? stop() : speak(dua.arabic, dua.id))}
-            aria-label={isSpeaking ? 'Stop recitation' : 'Listen to recitation'}
+            aria-label={isSpeaking ? t.stop : t.listen}
           >
             {isSpeaking ? (
               <>
-                <span className="eq" aria-hidden>
-                  <i />
-                  <i />
-                  <i />
-                </span>
-                Stop
+                <span className="eq" aria-hidden><i /><i /><i /></span> {t.stop}
               </>
             ) : (
-              <>
-                <span aria-hidden>▶</span> Listen
-              </>
+              <><span aria-hidden>▶</span> {t.listen}</>
             )}
           </button>
-        )}
-      </div>
+        </div>
+      )}
 
       <div className="card__translations">
-        {shown.transliteration && (
-          <p className="t t--translit">{dua.transliteration}</p>
-        )}
+        {shown.transliteration && <p className="t t--translit">{dua.transliteration}</p>}
         {shown.english && (
-          <p className="t t--en">
-            <span className="t__tag">EN</span>
-            {dua.english}
-          </p>
+          <p className="t t--en"><span className="t__tag">EN</span>{dua.english}</p>
         )}
         {shown.urdu && (
-          <p className="t t--ur" dir="rtl" lang="ur">
-            <span className="t__tag">اردو</span>
-            {dua.urdu}
-          </p>
+          <p className="t t--ur" dir="rtl" lang="ur"><span className="t__tag">اردو</span>{dua.urdu}</p>
         )}
       </div>
 
       {dua.note && <p className="card__note">ℹ️ {dua.note}</p>}
 
-      <div className="card__foot">
-        <span className="ref">📖 {dua.reference}</span>
-      </div>
+      <div className="card__foot"><span className="ref">📖 {dua.reference}</span></div>
     </article>
   )
 }
@@ -311,37 +268,23 @@ function DuaCard({ dua, shown, speak, stop, isSpeaking, speechSupported }) {
 function Chip({ active, onClick, children, color, variant }) {
   return (
     <button
-      className={`chip ${active ? 'chip--active' : ''} ${
-        variant === 'toggle' ? 'chip--toggle' : ''
-      }`}
+      className={`chip ${active ? 'chip--active' : ''} ${variant === 'toggle' ? 'chip--toggle' : ''}`}
       onClick={onClick}
       style={active && color ? { '--chip-accent': color } : undefined}
     >
-      {variant === 'toggle' && (
-        <span className="chip__check" aria-hidden>
-          {active ? '✓' : ''}
-        </span>
-      )}
+      {variant === 'toggle' && <span className="chip__check" aria-hidden>{active ? '✓' : ''}</span>}
       {children}
     </button>
   )
 }
 
-function EmptyState({ onReset }) {
+function EmptyState({ t, onReset }) {
   return (
     <div className="empty">
-      <div className="empty__icon" aria-hidden>
-        🕊️
-      </div>
-      <h3>No duas match your search</h3>
-      <p>Try a different word, prophet, or theme.</p>
-      <button className="btn" onClick={onReset}>
-        Reset filters
-      </button>
+      <div className="empty__icon" aria-hidden>🕊️</div>
+      <h3>{t.emptyTitle}</h3>
+      <p>{t.emptyBody}</p>
+      <button className="btn" onClick={onReset}>{t.reset}</button>
     </div>
   )
-}
-
-function BackgroundOrnament() {
-  return <div className="bg-ornament" aria-hidden />
 }
