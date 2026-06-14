@@ -14,6 +14,51 @@ export const CATEGORIES = {
   provision: { label: 'Provision', labelUr: 'رزق', icon: '🌾', color: '#a06a2f' },
 }
 
+// Reciters available for audio playback.
+export const RECITERS = {
+  alafasy: {
+    id: 'alafasy',
+    name: 'Mishary Rashid Alafasy',
+    nameAr: 'مشاري راشد العفاسي',
+    type: 'ayah', // exact per-ayah files (everyayah.com)
+  },
+  bandar: {
+    id: 'bandar',
+    name: 'Bandar Baleela',
+    nameAr: 'بندر بليلة',
+    type: 'segment', // full-surah file (quranicaudio.com) seeked to the verse
+  },
+}
+
+// Per-dua audio map: which surah/ayah(s) each dua covers, plus Bandar Baleela's
+// precise verse timings (seconds) within the full-surah recording.
+// Timings sourced from the Quran.com (QDC) segment data for this exact recording.
+export const AUDIO = {
+  'adam-1': { surah: 7, ayahs: [23], bandar: { from: 324.42, to: 341.53 } },
+  'nuh-1': { surah: 71, ayahs: [28], bandar: { from: 294.13, to: 317.1 } },
+  'nuh-2': { surah: 54, ayahs: [10], bandar: { from: 85.77, to: 93.94 } },
+  'ibrahim-1': { surah: 37, ayahs: [100], bandar: { from: 701.3, to: 705.71 } },
+  'ibrahim-2': { surah: 14, ayahs: [40], bandar: { from: 1054.63, to: 1068.7 } },
+  'ibrahim-3': { surah: 14, ayahs: [41], bandar: { from: 1068.7, to: 1079.37 } },
+  'ibrahim-4': { surah: 2, ayahs: [127], bandar: { from: 2386.94, to: 2401.16 } },
+  'ibrahim-5': { surah: 2, ayahs: [126], bandar: { from: 2343.63, to: 2386.94 } },
+  'yusuf-1': { surah: 12, ayahs: [101], bandar: { from: 2014.13, to: 2046.57 } },
+  'musa-1': { surah: 20, ayahs: [25, 26, 27, 28], bandar: { from: 208.8, to: 222.98 } },
+  'musa-2': { surah: 28, ayahs: [24], bandar: { from: 488.21, to: 507.73 } },
+  'musa-3': { surah: 7, ayahs: [151], bandar: { from: 2659.35, to: 2673.93 } },
+  'ayyub-1': { surah: 21, ayahs: [83], bandar: { from: 1174.89, to: 1189.91 } },
+  'yunus-1': { surah: 21, ayahs: [87], bandar: { from: 1237.49, to: 1268.67 } },
+  'zakariya-1': { surah: 3, ayahs: [38], bandar: { from: 730.86, to: 744.91 } },
+  'zakariya-2': { surah: 21, ayahs: [89], bandar: { from: 1281.47, to: 1304.13 } },
+  'sulaiman-1': { surah: 27, ayahs: [19], bandar: { from: 331.01, to: 363.18 } },
+  'lut-1': { surah: 26, ayahs: [169], bandar: { from: 1251.93, to: 1258.78 } },
+  'shuayb-1': { surah: 7, ayahs: [89], bandar: { from: 1684.21, to: 1721.51 } },
+  'isa-1': { surah: 5, ayahs: [114], bandar: { from: 2875.95, to: 2899.24 } },
+  'muhammad-1': { surah: 2, ayahs: [201], bandar: { from: 4015.35, to: 4036.78 } },
+  'muhammad-2': { surah: 20, ayahs: [114], bandar: { from: 1414.49, to: 1438.03 } },
+  'muhammad-3': { surah: 23, ayahs: [118], bandar: { from: 1561.21, to: 1573.26 } },
+}
+
 export const DUAS = [
   // ---------------- Adam عليه السلام ----------------
   {

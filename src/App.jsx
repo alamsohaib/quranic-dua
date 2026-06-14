@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
-import { CATEGORIES, DUAS } from './data/duas.js'
-import { useSpeech } from './useSpeech.js'
+import { CATEGORIES, DUAS, RECITERS } from './data/duas.js'
+import { useAudio } from './useAudio.js'
 import { STRINGS, UI_LANGS } from './i18n.js'
 
 const PROPHETS = [...new Set(DUAS.map((d) => d.prophet))]
@@ -23,11 +23,12 @@ export default function App() {
   })
   const [theme, setTheme] = useState(() => localStorage.getItem('dua-theme') || 'light')
   const [lang, setLang] = useState(() => localStorage.getItem('dua-lang') || 'en')
+  const [reciter, setReciter] = useState(() => localStorage.getItem('dua-reciter') || 'alafasy')
 
   const t = STRINGS[lang]
   const isUr = lang === 'ur'
 
-  const { speak, stop, speakingId, supported, error, hasArabicVoice, clearError } = useSpeech()
+  const { toggle, playingId, loadingId, error, clearError } = useAudio()
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -39,6 +40,10 @@ export default function App() {
     document.documentElement.dir = t.dir
     localStorage.setItem('dua-lang', lang)
   }, [lang, t.dir])
+
+  useEffect(() => {
+    localStorage.setItem('dua-reciter', reciter)
+  }, [reciter])
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -104,23 +109,37 @@ export default function App() {
 
           <p className="hero__lede">{t.lede}</p>
 
-          <div className="searchbar">
-            <span className="searchbar__icon" aria-hidden>🔍</span>
-            <input
-              type="search"
-              className="searchbar__input"
-              placeholder={t.searchPlaceholder}
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              aria-label={t.searchPlaceholder}
-            />
-            {query && (
-              <button className="searchbar__clear" onClick={() => setQuery('')} aria-label="Clear">✕</button>
-            )}
-          </div>
+          <div className="hero__row">
+            <div className="searchbar">
+              <span className="searchbar__icon" aria-hidden>🔍</span>
+              <input
+                type="search"
+                className="searchbar__input"
+                placeholder={t.searchPlaceholder}
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                aria-label={t.searchPlaceholder}
+              />
+              {query && (
+                <button className="searchbar__clear" onClick={() => setQuery('')} aria-label="Clear">✕</button>
+              )}
+            </div>
 
-          {!supported && <p className="notice">{t.noSpeech}</p>}
-          {supported && !hasArabicVoice && <p className="notice notice--info">{t.noArabicVoice}</p>}
+            <label className="reciter">
+              <span className="reciter__label">🎙️ {t.reciter}</span>
+              <select
+                className="reciter__select"
+                value={reciter}
+                onChange={(e) => setReciter(e.target.value)}
+              >
+                {Object.values(RECITERS).map((r) => (
+                  <option key={r.id} value={r.id}>
+                    {r.name} — {r.nameAr}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
         </div>
       </header>
 
@@ -199,10 +218,10 @@ export default function App() {
                 t={t}
                 isUr={isUr}
                 shown={shownTranslations}
-                speak={speak}
-                stop={stop}
-                isSpeaking={speakingId === d.id}
-                speechSupported={supported}
+                reciter={reciter}
+                onToggle={() => toggle(d.id, reciter)}
+                isPlaying={playingId === d.id}
+                isLoading={loadingId === d.id}
               />
             ))}
           </div>
@@ -214,8 +233,9 @@ export default function App() {
   )
 }
 
-function DuaCard({ dua, t, isUr, shown, speak, stop, isSpeaking, speechSupported }) {
+function DuaCard({ dua, t, isUr, shown, reciter, onToggle, isPlaying, isLoading }) {
   const cat = CATEGORIES[dua.category]
+  const active = isPlaying || isLoading
   return (
     <article className="card" style={{ '--accent': cat?.color }} dir="ltr">
       <div className="card__head">
@@ -230,23 +250,22 @@ function DuaCard({ dua, t, isUr, shown, speak, stop, isSpeaking, speechSupported
 
       <p className="card__arabic" dir="rtl" lang="ar">{dua.arabic}</p>
 
-      {speechSupported && (
-        <div className="card__audio">
-          <button
-            className={`play-btn ${isSpeaking ? 'play-btn--active' : ''}`}
-            onClick={() => (isSpeaking ? stop() : speak(dua.arabic, dua.id))}
-            aria-label={isSpeaking ? t.stop : t.listen}
-          >
-            {isSpeaking ? (
-              <>
-                <span className="eq" aria-hidden><i /><i /><i /></span> {t.stop}
-              </>
-            ) : (
-              <><span aria-hidden>▶</span> {t.listen}</>
-            )}
-          </button>
-        </div>
-      )}
+      <div className="card__audio">
+        <button
+          className={`play-btn ${active ? 'play-btn--active' : ''}`}
+          onClick={onToggle}
+          aria-label={isPlaying ? t.stop : t.listen}
+        >
+          {isLoading ? (
+            <><span className="spinner" aria-hidden /> {t.loading}</>
+          ) : isPlaying ? (
+            <><span className="eq" aria-hidden><i /><i /><i /></span> {t.stop}</>
+          ) : (
+            <><span aria-hidden>▶</span> {t.listen}</>
+          )}
+        </button>
+        <span className="card__reciter">{RECITERS[reciter]?.name}</span>
+      </div>
 
       <div className="card__translations">
         {shown.transliteration && <p className="t t--translit">{dua.transliteration}</p>}

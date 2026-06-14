@@ -207,7 +207,14 @@ body {
   font-size: 1.02rem;
 }
 
-/* ---------- search ---------- */
+/* ---------- search + reciter row ---------- */
+.hero__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: stretch;
+}
+
 .searchbar {
   display: flex;
   align-items: center;
@@ -215,9 +222,46 @@ body {
   background: var(--surface);
   border-radius: 16px;
   padding: 4px 16px;
-  max-width: 640px;
+  flex: 1 1 340px;
   box-shadow: var(--shadow);
   border: 1px solid var(--border);
+}
+
+.reciter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 8px 16px;
+  box-shadow: var(--shadow);
+  flex: 0 1 auto;
+}
+
+.reciter__label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+}
+
+.reciter__select {
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  max-width: 260px;
+}
+
+.reciter__select option {
+  color: #1c2b25;
 }
 
 .searchbar__icon {
@@ -489,6 +533,31 @@ body {
 
 .card__audio {
   margin: 6px 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card__reciter {
+  font-size: 0.75rem;
+  color: var(--ink-faint);
+  font-weight: 600;
+}
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .play-btn {
