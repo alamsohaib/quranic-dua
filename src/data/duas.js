@@ -12,6 +12,7 @@ export const CATEGORIES = {
   mercy: { label: 'Mercy', labelUr: 'رحمت', icon: '💚', color: '#1f9d72' },
   steadfastness: { label: 'Steadfastness', labelUr: 'استقامت', icon: '⛰️', color: '#4a7a5c' },
   provision: { label: 'Provision', labelUr: 'رزق', icon: '🌾', color: '#a06a2f' },
+  justice: { label: 'Divine Justice & Help', labelUr: 'انصاف و نصرت', icon: '⚖️', color: '#4a6fa5' },
 }
 
 // Reciters available for audio playback.
@@ -57,6 +58,29 @@ export const AUDIO = {
   'muhammad-1': { surah: 2, ayahs: [201], bandar: { from: 4015.35, to: 4036.78 } },
   'muhammad-2': { surah: 20, ayahs: [114], bandar: { from: 1414.49, to: 1438.03 } },
   'muhammad-3': { surah: 23, ayahs: [118], bandar: { from: 1561.21, to: 1573.26 } },
+
+  'nuh-knowledge': { surah: 11, ayahs: [47], bandar: { from: 1044.08, to: 1063.59 } },
+  'nuh-against': { surah: 71, ayahs: [26], bandar: { from: 269.87, to: 279.97 } },
+  'nuh-decide': { surah: 26, ayahs: [117, 118], bandar: { from: 865.08, to: 879.97 } },
+  'ibrahim-secure': { surah: 14, ayahs: [35], bandar: { from: 927.09, to: 942.64 } },
+  'ibrahim-wisdom': { surah: 26, ayahs: [83, 84, 85], bandar: { from: 631.88, to: 653.02 } },
+  'ibrahim-submit': { surah: 2, ayahs: [128], bandar: { from: 2401.16, to: 2420.23 } },
+  'ibrahim-messenger': { surah: 2, ayahs: [129], bandar: { from: 2420.23, to: 2438.88 } },
+  'ibrahim-trust': { surah: 60, ayahs: [5], bandar: { from: 193.54, to: 210.93 } },
+  'lut-help': { surah: 29, ayahs: [30], bandar: { from: 597.25, to: 603.89 } },
+  'yusuf-prison': { surah: 12, ayahs: [33], bandar: { from: 645.89, to: 665.45 } },
+  'musa-self': { surah: 28, ayahs: [16], bandar: { from: 323.5, to: 337.0 } },
+  'musa-save': { surah: 28, ayahs: [21], bandar: { from: 425.72, to: 439.47 } },
+  'musa-pharaoh': { surah: 10, ayahs: [88], bandar: { from: 2096.12, to: 2128.34 } },
+  'musa-separate': { surah: 5, ayahs: [25], bandar: { from: 732.98, to: 745.35 } },
+  'sulaiman-kingdom': { surah: 38, ayahs: [35], bandar: { from: 483.62, to: 498.59 } },
+  'ayyub-shaytan': { surah: 38, ayahs: [41], bandar: { from: 541.99, to: 556.51 } },
+  'zakariya-old': { surah: 19, ayahs: [4, 5, 6], bandar: { from: 25.73, to: 61.38 } },
+  'isa-servants': { surah: 5, ayahs: [118], bandar: { from: 2987.84, to: 3003.92 } },
+  'muhammad-shaytan': { surah: 23, ayahs: [97, 98], bandar: { from: 1263.18, to: 1277.42 } },
+  'muhammad-entrance': { surah: 17, ayahs: [80], bandar: { from: 1647.01, to: 1666.65 } },
+  'muhammad-parents': { surah: 17, ayahs: [24], bandar: { from: 536.44, to: 561.05 } },
+  'muhammad-judge': { surah: 21, ayahs: [112], bandar: { from: 1660.77, to: 1679.06 } },
 }
 
 export const DUAS = [
@@ -95,7 +119,7 @@ export const DUAS = [
     prophet: 'Nuh',
     prophetAr: 'نوح',
     prophetUr: 'نوح',
-    category: 'distress',
+    category: 'justice',
     arabic: 'أَنِّي مَغْلُوبٌ فَانتَصِرْ',
     transliteration: 'Annī maghlūbun fa-ntaṣir',
     english: 'Indeed, I am overpowered, so help (me).',
@@ -322,7 +346,7 @@ export const DUAS = [
     prophet: 'Shu‘ayb',
     prophetAr: 'شعيب',
     prophetUr: 'شعیب',
-    category: 'guidance',
+    category: 'justice',
     arabic: 'رَبَّنَا افْتَحْ بَيْنَنَا وَبَيْنَ قَوْمِنَا بِالْحَقِّ وَأَنتَ خَيْرُ الْفَاتِحِينَ',
     transliteration: 'Rabbanā-ftaḥ baynanā wa bayna qawminā bil-ḥaqqi wa anta khayru-l-fātiḥīn',
     english:
@@ -386,5 +410,342 @@ export const DUAS = [
     english: 'My Lord, forgive and have mercy, for You are the best of the merciful.',
     urdu: 'اے میرے رب! بخش دے اور رحم فرما، اور تُو سب رحم کرنے والوں سے بہتر ہے۔',
     reference: 'Surah Al-Mu’minun 23:118',
+  },
+
+  // ---------------- Additional duas ----------------
+
+  // Nuh عليه السلام
+  {
+    id: 'nuh-knowledge',
+    prophet: 'Nuh',
+    prophetAr: 'نوح',
+    prophetUr: 'نوح',
+    category: 'forgiveness',
+    arabic:
+      'رَبِّ إِنِّىٓ أَعُوذُ بِكَ أَنْ أَسْـَٔلَكَ مَا لَيْسَ لِى بِهِۦ عِلْمٌ ۖ وَإِلَّا تَغْفِرْ لِى وَتَرْحَمْنِىٓ أَكُن مِّنَ ٱلْخَٰسِرِينَ',
+    transliteration:
+      'Rabbi innī a‘ūdhu bika an as’alaka mā laysa lī bihī ‘ilm, wa illā taghfir lī wa tarḥamnī akun mina-l-khāsirīn',
+    english:
+      'My Lord, I seek refuge in You from asking that of which I have no knowledge. And unless You forgive me and have mercy upon me, I will be among the losers.',
+    urdu: 'میرے پروردگار! میں تجھ سے پناہ مانگتا ہوں کہ ایسی چیز کا سوال کروں جس کی حقیقت مجھے معلوم نہیں۔ اور اگر تو نے مجھے نہ بخشا اور مجھ پر رحم نہ کیا تو میں نقصان اٹھانے والوں میں سے ہو جاؤں گا۔',
+    reference: 'Surah Hud 11:47',
+  },
+  {
+    id: 'nuh-against',
+    prophet: 'Nuh',
+    prophetAr: 'نوح',
+    prophetUr: 'نوح',
+    category: 'justice',
+    arabic: 'رَّبِّ لَا تَذَرْ عَلَى ٱلْأَرْضِ مِنَ ٱلْكَٰفِرِينَ دَيَّارًا',
+    transliteration: 'Rabbi lā tadhar ‘ala-l-arḍi mina-l-kāfirīna dayyārā',
+    english: 'My Lord, do not leave upon the earth from among the disbelievers an inhabitant.',
+    urdu: 'میرے پروردگار! روئے زمین پر کسی کافر کو بسنے والا نہ رہنے دے۔',
+    reference: 'Surah Nuh 71:26',
+    note: 'Said after his people persisted in rejection for centuries.',
+  },
+  {
+    id: 'nuh-decide',
+    prophet: 'Nuh',
+    prophetAr: 'نوح',
+    prophetUr: 'نوح',
+    category: 'justice',
+    arabic:
+      'رَبِّ إِنَّ قَوْمِى كَذَّبُونِ فَٱفْتَحْ بَيْنِى وَبَيْنَهُمْ فَتْحًا وَنَجِّنِى وَمَن مَّعِىَ مِنَ ٱلْمُؤْمِنِينَ',
+    transliteration:
+      'Rabbi inna qawmī kadhdhabūn, fa-ftaḥ baynī wa baynahum fatḥan wa najjinī wa man ma‘iya mina-l-mu’minīn',
+    english:
+      'My Lord, indeed my people have denied me. Then judge between me and them with decisive judgement, and save me and those with me of the believers.',
+    urdu: 'میرے پروردگار! میری قوم نے مجھے جھٹلا دیا، سو تو میرے اور اُن کے درمیان کھلا فیصلہ فرما دے، اور مجھے اور جو مومن میرے ساتھ ہیں اُن کو بچا لے۔',
+    reference: 'Surah Ash-Shu‘ara 26:117–118',
+  },
+
+  // Ibrahim عليه السلام
+  {
+    id: 'ibrahim-secure',
+    prophet: 'Ibrahim',
+    prophetAr: 'إبراهيم',
+    prophetUr: 'ابراہیم',
+    category: 'protection',
+    arabic:
+      'رَبِّ ٱجْعَلْ هَٰذَا ٱلْبَلَدَ ءَامِنًا وَٱجْنُبْنِى وَبَنِىَّ أَن نَّعْبُدَ ٱلْأَصْنَامَ',
+    transliteration: 'Rabbi-j‘al hādha-l-balada āminan wa-jnubnī wa baniyya an na‘buda-l-aṣnām',
+    english:
+      'My Lord, make this city secure and keep me and my sons away from worshipping idols.',
+    urdu: 'میرے پروردگار! اس شہر کو امن کی جگہ بنا دے، اور مجھے اور میری اولاد کو بتوں کی پرستش سے بچائے رکھ۔',
+    reference: 'Surah Ibrahim 14:35',
+  },
+  {
+    id: 'ibrahim-wisdom',
+    prophet: 'Ibrahim',
+    prophetAr: 'إبراهيم',
+    prophetUr: 'ابراہیم',
+    category: 'guidance',
+    arabic:
+      'رَبِّ هَبْ لِى حُكْمًا وَأَلْحِقْنِى بِٱلصَّٰلِحِينَ وَٱجْعَل لِّى لِسَانَ صِدْقٍ فِى ٱلْءَاخِرِينَ وَٱجْعَلْنِى مِن وَرَثَةِ جَنَّةِ ٱلنَّعِيمِ',
+    transliteration:
+      'Rabbi hab lī ḥukman wa alḥiqnī biṣ-ṣāliḥīn, wa-j‘al lī lisāna ṣidqin fi-l-ākhirīn, wa-j‘alnī min warathati jannati-n-na‘īm',
+    english:
+      'My Lord, grant me wisdom and join me with the righteous, and grant me an honourable mention among later generations, and place me among the inheritors of the Garden of Pleasure.',
+    urdu: 'میرے پروردگار! مجھے علم و دانش عطا فرما اور مجھے نیکوکاروں میں شامل کر، اور پچھلوں میں میرا ذکرِ خیر جاری کر، اور مجھے نعمت کی بہشت کے وارثوں میں سے بنا۔',
+    reference: 'Surah Ash-Shu‘ara 26:83–85',
+  },
+  {
+    id: 'ibrahim-submit',
+    prophet: 'Ibrahim',
+    prophetAr: 'إبراهيم',
+    prophetUr: 'ابراہیم',
+    category: 'steadfastness',
+    arabic:
+      'رَبَّنَا وَٱجْعَلْنَا مُسْلِمَيْنِ لَكَ وَمِن ذُرِّيَّتِنَآ أُمَّةً مُّسْلِمَةً لَّكَ وَأَرِنَا مَنَاسِكَنَا وَتُبْ عَلَيْنَآ ۖ إِنَّكَ أَنتَ ٱلتَّوَّابُ ٱلرَّحِيمُ',
+    transliteration:
+      'Rabbanā wa-j‘alnā muslimayni laka wa min dhurriyyatinā ummatan muslimatan laka wa arinā manāsikanā wa tub ‘alaynā, innaka anta-t-Tawwābu-r-Raḥīm',
+    english:
+      'Our Lord, make us Muslims [in submission] to You and from our descendants a Muslim nation in submission to You. And show us our rites and accept our repentance. Indeed, You are the Accepting of repentance, the Merciful.',
+    urdu: 'اے ہمارے پروردگار! ہمیں اپنا فرمانبردار بنا اور ہماری اولاد میں سے بھی ایک گروہ کو اپنا مطیع بنا، اور ہمیں عبادت کے طریقے سکھا اور ہم پر توجہ فرما۔ بے شک تو ہی توبہ قبول کرنے والا، مہربان ہے۔',
+    reference: 'Surah Al-Baqarah 2:128',
+    note: 'Said by Ibrahim and Isma‘il while raising the foundations of the Ka‘bah.',
+  },
+  {
+    id: 'ibrahim-messenger',
+    prophet: 'Ibrahim',
+    prophetAr: 'إبراهيم',
+    prophetUr: 'ابراہیم',
+    category: 'guidance',
+    arabic:
+      'رَبَّنَا وَٱبْعَثْ فِيهِمْ رَسُولًا مِّنْهُمْ يَتْلُوا۟ عَلَيْهِمْ ءَايَٰتِكَ وَيُعَلِّمُهُمُ ٱلْكِتَٰبَ وَٱلْحِكْمَةَ وَيُزَكِّيهِمْ ۚ إِنَّكَ أَنتَ ٱلْعَزِيزُ ٱلْحَكِيمُ',
+    transliteration:
+      'Rabbanā wa-b‘ath fīhim rasūlan minhum yatlū ‘alayhim āyātika wa yu‘allimuhumu-l-Kitāba wa-l-ḥikmata wa yuzakkīhim, innaka anta-l-‘Azīzu-l-Ḥakīm',
+    english:
+      'Our Lord, send among them a messenger from themselves who will recite to them Your verses and teach them the Book and wisdom and purify them. Indeed, You are the Exalted in Might, the Wise.',
+    urdu: 'اے ہمارے پروردگار! اِن میں اِنہی میں سے ایک پیغمبر مبعوث فرما جو اُن کو تیری آیتیں پڑھ کر سنائے اور انہیں کتاب و حکمت سکھائے اور اُن کو پاک کرے۔ بے شک تو غالب، حکمت والا ہے۔',
+    reference: 'Surah Al-Baqarah 2:129',
+    note: 'A prayer answered by the sending of the Prophet Muhammad ﷺ.',
+  },
+  {
+    id: 'ibrahim-trust',
+    prophet: 'Ibrahim',
+    prophetAr: 'إبراهيم',
+    prophetUr: 'ابراہیم',
+    category: 'protection',
+    arabic:
+      'رَبَّنَا لَا تَجْعَلْنَا فِتْنَةً لِّلَّذِينَ كَفَرُوا۟ وَٱغْفِرْ لَنَا رَبَّنَآ ۖ إِنَّكَ أَنتَ ٱلْعَزِيزُ ٱلْحَكِيمُ',
+    transliteration:
+      'Rabbanā lā taj‘alnā fitnatan lilladhīna kafarū wa-ghfir lanā Rabbanā, innaka anta-l-‘Azīzu-l-Ḥakīm',
+    english:
+      'Our Lord, make us not [an object of] trial for the disbelievers, and forgive us, our Lord. Indeed, it is You who is the Exalted in Might, the Wise.',
+    urdu: 'اے ہمارے پروردگار! ہمیں کافروں کے لیے آزمائش (کا ذریعہ) نہ بنا، اور اے ہمارے پروردگار! ہمیں بخش دے۔ بے شک تو ہی غالب، حکمت والا ہے۔',
+    reference: 'Surah Al-Mumtahanah 60:5',
+  },
+
+  // Lut عليه السلام
+  {
+    id: 'lut-help',
+    prophet: 'Lut',
+    prophetAr: 'لوط',
+    prophetUr: 'لوط',
+    category: 'justice',
+    arabic: 'رَبِّ ٱنصُرْنِى عَلَى ٱلْقَوْمِ ٱلْمُفْسِدِينَ',
+    transliteration: 'Rabbi-nṣurnī ‘ala-l-qawmi-l-mufsidīn',
+    english: 'My Lord, support me against the corrupting people.',
+    urdu: 'میرے پروردگار! اِن مفسد لوگوں کے مقابلے میں میری مدد فرما۔',
+    reference: 'Surah Al-‘Ankabut 29:30',
+  },
+
+  // Yusuf عليه السلام
+  {
+    id: 'yusuf-prison',
+    prophet: 'Yusuf',
+    prophetAr: 'يوسف',
+    prophetUr: 'یوسف',
+    category: 'protection',
+    arabic:
+      'رَبِّ ٱلسِّجْنُ أَحَبُّ إِلَىَّ مِمَّا يَدْعُونَنِىٓ إِلَيْهِ ۖ وَإِلَّا تَصْرِفْ عَنِّى كَيْدَهُنَّ أَصْبُ إِلَيْهِنَّ وَأَكُن مِّنَ ٱلْجَٰهِلِينَ',
+    transliteration:
+      'Rabbi-s-sijnu aḥabbu ilayya mimmā yad‘ūnanī ilayh, wa illā taṣrif ‘annī kaydahunna aṣbu ilayhinna wa akun mina-l-jāhilīn',
+    english:
+      'My Lord, prison is more to my liking than that to which they invite me. And if You do not avert their plan from me, I might incline toward them and be of the ignorant.',
+    urdu: 'میرے پروردگار! جس کام کی طرف یہ مجھے بلاتی ہیں اُس سے تو مجھے قید زیادہ پسند ہے۔ اور اگر تو نے اِن کے فریب کو مجھ سے نہ ہٹایا تو میں اِن کی طرف مائل ہو جاؤں گا اور نادانوں میں سے ہو جاؤں گا۔',
+    reference: 'Surah Yusuf 12:33',
+  },
+
+  // Musa عليه السلام
+  {
+    id: 'musa-self',
+    prophet: 'Musa',
+    prophetAr: 'موسى',
+    prophetUr: 'موسیٰ',
+    category: 'forgiveness',
+    arabic: 'رَبِّ إِنِّى ظَلَمْتُ نَفْسِى فَٱغْفِرْ لِى',
+    transliteration: 'Rabbi innī ẓalamtu nafsī fa-ghfir lī',
+    english: 'My Lord, indeed I have wronged myself, so forgive me.',
+    urdu: 'میرے پروردگار! میں نے اپنی جان پر ظلم کیا، پس مجھے بخش دے۔',
+    reference: 'Surah Al-Qasas 28:16',
+    note: 'Allah forgave him in the same verse: “so He forgave him.”',
+  },
+  {
+    id: 'musa-save',
+    prophet: 'Musa',
+    prophetAr: 'موسى',
+    prophetUr: 'موسیٰ',
+    category: 'protection',
+    arabic: 'رَبِّ نَجِّنِى مِنَ ٱلْقَوْمِ ٱلظَّٰلِمِينَ',
+    transliteration: 'Rabbi najjinī mina-l-qawmi-ẓ-ẓālimīn',
+    english: 'My Lord, save me from the wrongdoing people.',
+    urdu: 'میرے پروردگار! مجھے ظالم لوگوں سے نجات دے۔',
+    reference: 'Surah Al-Qasas 28:21',
+  },
+  {
+    id: 'musa-pharaoh',
+    prophet: 'Musa',
+    prophetAr: 'موسى',
+    prophetUr: 'موسیٰ',
+    category: 'justice',
+    arabic:
+      'رَبَّنَآ إِنَّكَ ءَاتَيْتَ فِرْعَوْنَ وَمَلَأَهُۥ زِينَةً وَأَمْوَٰلًا فِى ٱلْحَيَوٰةِ ٱلدُّنْيَا رَبَّنَا لِيُضِلُّوا۟ عَن سَبِيلِكَ ۖ رَبَّنَا ٱطْمِسْ عَلَىٰٓ أَمْوَٰلِهِمْ وَٱشْدُدْ عَلَىٰ قُلُوبِهِمْ فَلَا يُؤْمِنُوا۟ حَتَّىٰ يَرَوُا۟ ٱلْعَذَابَ ٱلْأَلِيمَ',
+    transliteration:
+      'Rabbanā innaka ātayta Fir‘awna wa mala’ahū zīnatan wa amwālan fi-l-ḥayāti-d-dunyā, Rabbanā li-yuḍillū ‘an sabīlik, Rabbana-ṭmis ‘alā amwālihim wa-shdud ‘alā qulūbihim falā yu’minū ḥattā yarawu-l-‘adhāba-l-alīm',
+    english:
+      'Our Lord, You have given Pharaoh and his establishment splendour and wealth in the worldly life, our Lord, that they may lead [men] astray from Your way. Our Lord, obliterate their wealth and harden their hearts so that they will not believe until they see the painful punishment.',
+    urdu: 'اے ہمارے پروردگار! تو نے فرعون اور اس کے سرداروں کو دنیاوی زندگی میں زینت اور مال و دولت دے رکھی ہے، اے پروردگار! (نتیجہ یہ کہ) وہ تیرے راستے سے گمراہ کرتے ہیں۔ اے پروردگار! اِن کے مال برباد کر دے اور اِن کے دلوں کو سخت کر دے کہ یہ ایمان نہ لائیں جب تک دردناک عذاب نہ دیکھ لیں۔',
+    reference: 'Surah Yunus 10:88',
+  },
+  {
+    id: 'musa-separate',
+    prophet: 'Musa',
+    prophetAr: 'موسى',
+    prophetUr: 'موسیٰ',
+    category: 'justice',
+    arabic:
+      'رَبِّ إِنِّى لَآ أَمْلِكُ إِلَّا نَفْسِى وَأَخِى ۖ فَٱفْرُقْ بَيْنَنَا وَبَيْنَ ٱلْقَوْمِ ٱلْفَٰسِقِينَ',
+    transliteration:
+      'Rabbi innī lā amliku illā nafsī wa akhī, fa-fruq baynanā wa bayna-l-qawmi-l-fāsiqīn',
+    english:
+      'My Lord, indeed I do not control except myself and my brother, so part us from the defiantly disobedient people.',
+    urdu: 'میرے پروردگار! میں اپنے اور اپنے بھائی کے سوا کسی پر اختیار نہیں رکھتا، پس ہمارے اور اِن نافرمان لوگوں کے درمیان جدائی ڈال دے۔',
+    reference: 'Surah Al-Ma’idah 5:25',
+  },
+
+  // Sulaiman عليه السلام
+  {
+    id: 'sulaiman-kingdom',
+    prophet: 'Sulaiman',
+    prophetAr: 'سليمان',
+    prophetUr: 'سلیمان',
+    category: 'provision',
+    arabic:
+      'رَبِّ ٱغْفِرْ لِى وَهَبْ لِى مُلْكًا لَّا يَنۢبَغِى لِأَحَدٍ مِّنۢ بَعْدِىٓ ۖ إِنَّكَ أَنتَ ٱلْوَهَّابُ',
+    transliteration:
+      'Rabbi-ghfir lī wa hab lī mulkan lā yanbaghī li-aḥadin min ba‘dī, innaka anta-l-Wahhāb',
+    english:
+      'My Lord, forgive me and grant me a kingdom such as will not belong to anyone after me. Indeed, You are the Bestower.',
+    urdu: 'میرے پروردگار! مجھے بخش دے اور مجھے ایسی بادشاہی عطا فرما جو میرے بعد کسی کو حاصل نہ ہو۔ بے شک تو ہی بڑا عطا کرنے والا ہے۔',
+    reference: 'Surah Sad 38:35',
+  },
+
+  // Ayyub عليه السلام
+  {
+    id: 'ayyub-shaytan',
+    prophet: 'Ayyub',
+    prophetAr: 'أيوب',
+    prophetUr: 'ایوب',
+    category: 'distress',
+    arabic: 'أَنِّى مَسَّنِىَ ٱلشَّيْطَٰنُ بِنُصْبٍ وَعَذَابٍ',
+    transliteration: 'Annī massaniya-sh-Shayṭānu bi-nuṣbin wa ‘adhāb',
+    english: 'Indeed, Satan has touched me with hardship and torment.',
+    urdu: '(اے رب) شیطان نے مجھے سخت تکلیف اور عذاب پہنچا رکھا ہے۔',
+    reference: 'Surah Sad 38:41',
+  },
+
+  // Zakariya عليه السلام
+  {
+    id: 'zakariya-old',
+    prophet: 'Zakariya',
+    prophetAr: 'زكريا',
+    prophetUr: 'زکریا',
+    category: 'progeny',
+    arabic:
+      'رَبِّ إِنِّى وَهَنَ ٱلْعَظْمُ مِنِّى وَٱشْتَعَلَ ٱلرَّأْسُ شَيْبًا وَلَمْ أَكُنۢ بِدُعَآئِكَ رَبِّ شَقِيًّا وَإِنِّى خِفْتُ ٱلْمَوَٰلِىَ مِن وَرَآءِى وَكَانَتِ ٱمْرَأَتِى عَاقِرًا فَهَبْ لِى مِن لَّدُنكَ وَلِيًّا يَرِثُنِى وَيَرِثُ مِنْ ءَالِ يَعْقُوبَ ۖ وَٱجْعَلْهُ رَبِّ رَضِيًّا',
+    transliteration:
+      'Rabbi innī wahana-l-‘aẓmu minnī wa-shta‘ala-r-ra’su shayban wa lam akun bi-du‘ā’ika Rabbi shaqiyyā. Wa innī khiftu-l-mawāliya min warā’ī wa kānati-mra’atī ‘āqiran fa-hab lī min ladunka waliyyā. Yarithunī wa yarithu min āli Ya‘qūb, wa-j‘alhu Rabbi raḍiyyā',
+    english:
+      'My Lord, my bones have weakened, and my head has filled with white, and never have I been unhappy in my supplication to You, my Lord. And indeed, I fear the successors after me, and my wife has been barren, so give me from Yourself an heir who will inherit me and inherit from the family of Jacob. And make him, my Lord, pleasing [to You].',
+    urdu: 'میرے پروردگار! میری ہڈیاں کمزور ہو گئی ہیں اور سر بڑھاپے سے سفید ہو چکا ہے، اور اے میرے رب! میں تجھ سے مانگ کر کبھی محروم نہیں رہا۔ اور میں اپنے بعد اپنے رشتہ داروں سے ڈرتا ہوں اور میری بیوی بانجھ ہے، سو مجھے اپنے پاس سے ایک وارث عطا فرما جو میری اور یعقوبؑ کی اولاد کی میراث کا وارث ہو، اور اے میرے رب! اُسے پسندیدہ بنا۔',
+    reference: 'Surah Maryam 19:4–6',
+  },
+
+  // Isa عليه السلام
+  {
+    id: 'isa-servants',
+    prophet: 'Isa',
+    prophetAr: 'عيسى',
+    prophetUr: 'عیسیٰ',
+    category: 'mercy',
+    arabic:
+      'إِن تُعَذِّبْهُمْ فَإِنَّهُمْ عِبَادُكَ ۖ وَإِن تَغْفِرْ لَهُمْ فَإِنَّكَ أَنتَ ٱلْعَزِيزُ ٱلْحَكِيمُ',
+    transliteration:
+      'In tu‘adhdhibhum fa-innahum ‘ibāduk, wa in taghfir lahum fa-innaka anta-l-‘Azīzu-l-Ḥakīm',
+    english:
+      'If You should punish them — indeed they are Your servants; but if You forgive them — indeed it is You who is the Exalted in Might, the Wise.',
+    urdu: 'اگر تو انہیں عذاب دے تو یہ تیرے بندے ہیں، اور اگر تو انہیں بخش دے تو بے شک تو ہی غالب، حکمت والا ہے۔',
+    reference: 'Surah Al-Ma’idah 5:118',
+  },
+
+  // Muhammad ﷺ
+  {
+    id: 'muhammad-shaytan',
+    prophet: 'Muhammad ﷺ',
+    prophetAr: 'محمد ﷺ',
+    prophetUr: 'محمد ﷺ',
+    category: 'protection',
+    arabic:
+      'رَّبِّ أَعُوذُ بِكَ مِنْ هَمَزَٰتِ ٱلشَّيَٰطِينِ وَأَعُوذُ بِكَ رَبِّ أَن يَحْضُرُونِ',
+    transliteration:
+      'Rabbi a‘ūdhu bika min hamazāti-sh-Shayāṭīn, wa a‘ūdhu bika Rabbi an yaḥḍurūn',
+    english:
+      'My Lord, I seek refuge in You from the incitements of the devils, and I seek refuge in You, my Lord, lest they be present with me.',
+    urdu: 'میرے پروردگار! میں شیطانوں کے وسوسوں سے تیری پناہ مانگتا ہوں، اور اے میرے رب! اِس سے بھی تیری پناہ مانگتا ہوں کہ وہ میرے پاس آ موجود ہوں۔',
+    reference: 'Surah Al-Mu’minun 23:97–98',
+  },
+  {
+    id: 'muhammad-entrance',
+    prophet: 'Muhammad ﷺ',
+    prophetAr: 'محمد ﷺ',
+    prophetUr: 'محمد ﷺ',
+    category: 'protection',
+    arabic:
+      'رَّبِّ أَدْخِلْنِى مُدْخَلَ صِدْقٍ وَأَخْرِجْنِى مُخْرَجَ صِدْقٍ وَٱجْعَل لِّى مِن لَّدُنكَ سُلْطَٰنًا نَّصِيرًا',
+    transliteration:
+      'Rabbi adkhilnī mudkhala ṣidqin wa akhrijnī mukhraja ṣidqin wa-j‘al lī min ladunka sulṭānan naṣīrā',
+    english:
+      'My Lord, cause me to enter a sound entrance and to exit a sound exit and grant me from Yourself a supporting authority.',
+    urdu: 'میرے پروردگار! مجھے سچائی کے ساتھ داخل فرما اور سچائی کے ساتھ نکال، اور اپنے پاس سے میرے لیے ایک مددگار غلبہ عطا فرما۔',
+    reference: 'Surah Al-Isra 17:80',
+  },
+  {
+    id: 'muhammad-parents',
+    prophet: 'Muhammad ﷺ',
+    prophetAr: 'محمد ﷺ',
+    prophetUr: 'محمد ﷺ',
+    category: 'mercy',
+    arabic: 'رَّبِّ ٱرْحَمْهُمَا كَمَا رَبَّيَانِى صَغِيرًا',
+    transliteration: 'Rabbi-rḥamhumā kamā rabbayānī ṣaghīrā',
+    english: 'My Lord, have mercy upon them as they brought me up [when I was] small.',
+    urdu: 'میرے پروردگار! اِن دونوں پر رحم فرما جیسا اِنہوں نے بچپن میں مجھے (محبت سے) پالا۔',
+    reference: 'Surah Al-Isra 17:24',
+    note: 'The Qur’an’s prayer for one’s parents.',
+  },
+  {
+    id: 'muhammad-judge',
+    prophet: 'Muhammad ﷺ',
+    prophetAr: 'محمد ﷺ',
+    prophetUr: 'محمد ﷺ',
+    category: 'justice',
+    arabic: 'رَبِّ ٱحْكُم بِٱلْحَقِّ ۗ وَرَبُّنَا ٱلرَّحْمَٰنُ ٱلْمُسْتَعَانُ عَلَىٰ مَا تَصِفُونَ',
+    transliteration:
+      'Rabbi-ḥkum bil-ḥaqq, wa Rabbuna-r-Raḥmānu-l-musta‘ānu ‘alā mā taṣifūn',
+    english:
+      'My Lord, judge in truth. And our Lord is the Most Merciful, the One whose help is sought against that which you describe.',
+    urdu: 'میرے پروردگار! حق کے ساتھ فیصلہ فرما دے۔ اور ہمارا پروردگار بڑا مہربان ہے، اُسی سے اُن باتوں پر مدد مانگی جاتی ہے جو تم بیان کرتے ہو۔',
+    reference: 'Surah Al-Anbiya 21:112',
   },
 ]
