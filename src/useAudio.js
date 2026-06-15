@@ -90,7 +90,9 @@ export function useAudio() {
         )
       }
 
-      if (reciter.type === 'ayah') {
+      // Per-ayah recitation: used for Alafasy, and as a graceful fallback for
+      // Bandar when this dua has no full-surah segment timings.
+      if (reciter.type === 'ayah' || !meta.bandar) {
         // Queue of exact per-ayah files, played back to back.
         queueRef.current = meta.ayahs.map((ay) => everyayahUrl(meta.surah, ay))
         const playNext = () => {

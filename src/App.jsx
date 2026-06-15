@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { CATEGORIES, DUAS, RECITERS } from './data/duas.js'
+import { CATEGORIES, DUAS, RECITERS, SOURCE } from './data/duas.js'
 import { useAudio } from './useAudio.js'
 import { STRINGS, UI_LANGS } from './i18n.js'
 
@@ -53,7 +53,7 @@ export default function App() {
       if (!q) return true
       const haystack = [
         d.prophet, d.prophetAr, d.prophetUr, d.arabic, d.transliteration,
-        d.english, d.urdu, d.reference, d.note || '',
+        d.english, d.urdu, d.reference, d.note || '', d.background || '', d.backgroundUr || '',
         CATEGORIES[d.category]?.label || '', CATEGORIES[d.category]?.labelUr || '',
       ].join(' ').toLowerCase()
       return haystack.includes(q)
@@ -278,6 +278,21 @@ function DuaCard({ dua, t, isUr, shown, reciter, onToggle, isPlaying, isLoading 
       </div>
 
       {dua.note && <p className="card__note">ℹ️ {dua.note}</p>}
+
+      {(isUr ? dua.backgroundUr : dua.background) && (
+        <details className="card__bg">
+          <summary className="card__bg-summary">📜 {t.background}</summary>
+          <p className="card__bg-text" dir={isUr ? 'rtl' : 'ltr'} lang={isUr ? 'ur' : 'en'}>
+            {isUr ? dua.backgroundUr : dua.background}
+          </p>
+          <p className="card__bg-source">
+            {t.source}:{' '}
+            <a href={SOURCE.url} target="_blank" rel="noopener noreferrer">
+              {isUr ? SOURCE.nameUr : SOURCE.name}
+            </a>
+          </p>
+        </details>
+      )}
 
       <div className="card__foot"><span className="ref">📖 {dua.reference}</span></div>
     </article>

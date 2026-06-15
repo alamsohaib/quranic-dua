@@ -680,6 +680,73 @@ body {
   border: 1px solid var(--border);
 }
 
+/* ---------- background / tafsir ---------- */
+.card__bg {
+  margin-top: 14px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 4px 12px;
+}
+
+.card__bg-summary {
+  list-style: none;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent);
+  padding: 8px 0;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card__bg-summary::-webkit-details-marker {
+  display: none;
+}
+
+.card__bg-summary::after {
+  content: '▾';
+  margin-left: auto;
+  font-size: 0.7rem;
+  opacity: 0.7;
+  transition: transform 0.2s ease;
+}
+
+.card__bg[open] .card__bg-summary::after {
+  transform: rotate(180deg);
+}
+
+.card__bg-text {
+  margin: 4px 0 10px;
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+
+.card__bg-text[lang='ur'] {
+  font-family: var(--font-urdu), var(--font-sans);
+  font-size: 1.02rem;
+  line-height: 2.3;
+}
+
+.card__bg-source {
+  margin: 0 0 8px;
+  font-size: 0.72rem;
+  color: var(--ink-faint);
+}
+
+.card__bg-source a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.card__bg-source a:hover {
+  text-decoration: underline;
+}
+
 .card__foot {
   margin-top: 16px;
   padding-top: 14px;
