@@ -729,6 +729,18 @@ body {
   font-family: var(--font-urdu), var(--font-sans);
   font-size: 1.02rem;
   line-height: 2.3;
+  text-align: right;
+}
+
+.card__bg-text--ur {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border);
+}
+
+.card__bg-text--ur .t__tag {
+  margin-right: 0;
+  margin-left: 8px;
 }
 
 .card__bg-source {

@@ -279,12 +279,19 @@ function DuaCard({ dua, t, isUr, shown, reciter, onToggle, isPlaying, isLoading 
 
       {dua.note && <p className="card__note">ℹ️ {dua.note}</p>}
 
-      {(isUr ? dua.backgroundUr : dua.background) && (
+      {(dua.background || dua.backgroundUr) && (
         <details className="card__bg">
           <summary className="card__bg-summary">📜 {t.background}</summary>
-          <p className="card__bg-text" dir={isUr ? 'rtl' : 'ltr'} lang={isUr ? 'ur' : 'en'}>
-            {isUr ? dua.backgroundUr : dua.background}
-          </p>
+          {dua.background && (
+            <p className="card__bg-text" dir="ltr" lang="en">
+              <span className="t__tag">EN</span>{dua.background}
+            </p>
+          )}
+          {dua.backgroundUr && (
+            <p className="card__bg-text card__bg-text--ur" dir="rtl" lang="ur">
+              <span className="t__tag">اردو</span>{dua.backgroundUr}
+            </p>
+          )}
           <p className="card__bg-source">
             {t.source}:{' '}
             <a href={SOURCE.url} target="_blank" rel="noopener noreferrer">
