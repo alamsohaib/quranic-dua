@@ -4,13 +4,20 @@ import { AUDIO, RECITERS } from './data/duas.js'
 const pad3 = (n) => String(n).padStart(3, '0')
 
 // Real reciter audio (MP3) — no system TTS voice required.
-//  • Alafasy   → exact per-ayah files from everyayah.com
-//  • Bandar    → full-surah file from quranicaudio.com, seeked to the verse timing
+//  • Alafasy           → exact per-ayah files from everyayah.com
+//  • Bandar / Dussary /
+//    AbdulBaset / Sudais → gapless full-surah file, seeked to the verse timing
 function everyayahUrl(surah, ayah) {
   return `https://everyayah.com/data/Alafasy_128kbps/${pad3(surah)}${pad3(ayah)}.mp3`
 }
-function bandarSurahUrl(surah) {
-  return `https://download.quranicaudio.com/quran/bandar_baleela/complete/${pad3(surah)}.mp3`
+
+// Full-surah file URL per segment reciter. Each reciter's verse timings in
+// AUDIO[duaId][reciterId] correspond to exactly these recordings.
+const SEGMENT_URL = {
+  bandar: (surah) => `https://download.quranicaudio.com/quran/bandar_baleela/complete/${pad3(surah)}.mp3`,
+  dussary: (surah) => `https://download.quranicaudio.com/quran/yasser_ad-dussary/${pad3(surah)}.mp3`,
+  baset: (surah) => `https://download.quranicaudio.com/qdc/abdul_baset/murattal/${surah}.mp3`,
+  sudais: (surah) => `https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/${surah}.mp3`,
 }
 
 export function useAudio() {
@@ -90,9 +97,10 @@ export function useAudio() {
         )
       }
 
-      // Per-ayah recitation: used for Alafasy, and as a graceful fallback for
-      // Bandar when this dua has no full-surah segment timings.
-      if (reciter.type === 'ayah' || !meta.bandar) {
+      // Per-ayah recitation: used for Alafasy, and as a graceful fallback for a
+      // segment reciter when this dua has no timings (or URL) for them.
+      const seg = meta[reciter.id]
+      if (reciter.type === 'ayah' || !seg || !SEGMENT_URL[reciter.id]) {
         // Queue of exact per-ayah files, played back to back.
         queueRef.current = meta.ayahs.map((ay) => everyayahUrl(meta.surah, ay))
         const playNext = () => {
@@ -109,9 +117,9 @@ export function useAudio() {
         playNext()
       } else {
         // Segment of a full-surah file: seek to start, stop at end.
-        const { from, to } = meta.bandar
+        const { from, to } = seg
         stopAtRef.current = to
-        a.src = bandarSurahUrl(meta.surah)
+        a.src = SEGMENT_URL[reciter.id](meta.surah)
         a.onloadedmetadata = () => {
           if (token !== tokenRef.current) return
           try {
